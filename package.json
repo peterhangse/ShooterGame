@@ -1,0 +1,36 @@
+{
+  "name": "cold-zero",
+  "version": "0.9.0",
+  "description": "COLD ZERO — One shot. No second chances. A precision sniper game with ballistics simulation.",
+  "private": true,
+  "author": "Cold Zero Team",
+  "license": "MIT",
+  "homepage": "https://cold-zero-game.web.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/cold-zero"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watch --verbose",
+    "test:coverage": "jest --coverage --verbose",
+    "deploy": "firebase deploy --only hosting",
+    "serve": "npx http-server . -p 8080 -c-1 --cors",
+    "validate": "node -e \"require('./src/ballistics.js'); console.log('Ballistics OK');\"",
+    "lint": "echo 'No linter configured yet — consider adding ESLint'"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/scenes/**",
+      "!src/main.js"
+    ]
+  }
+}

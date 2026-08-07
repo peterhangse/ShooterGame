@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>COLD ZERO — Sniper Precision Game</title>
+  <meta name="description" content="Cold Zero: A precision sniper game. Adjust elevation, read the wind, take the shot. One round. No second chances.">
+  <meta name="theme-color" content="#080808">
+  <meta name="color-scheme" content="dark">
+  <meta name="author" content="Cold Zero Team">
+  <meta name="keywords" content="sniper, precision, shooting, ballistics, game, browser game">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="COLD ZERO — Sniper Precision Game">
+  <meta property="og:description" content="Precision sniper game. Adjust elevation, read the wind, take the shot.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cold-zero-game.web.app">
+  <meta property="og:image" content="https://cold-zero-game.web.app/assets/og-image.png">
+  <meta property="og:site_name" content="COLD ZERO">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="COLD ZERO — One Shot. No Second Chances.">
+  <meta name="twitter:description" content="Adjust elevation, read the wind, take the shot. A precision sniper game.">
+
+  <!-- PWA / Mobile -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="COLD ZERO">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⦿</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Preload critical scripts -->
+  <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js">
+  <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.min.js">
+
+  <!-- Phaser 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+
+  <!-- Tone.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.min.js"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "COLD ZERO",
+    "description": "A precision sniper game. Adjust elevation, read the wind, take the shot.",
+    "genre": "Simulation",
+    "gamePlatform": "Web Browser",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "url": "https://cold-zero-game.web.app",
+    "inLanguage": "en"
+  }
+  </script>
+
+  <style>
+    /* ── CSS Custom Properties ── */
+    :root {
+      --col-void:    #080808;
+      --col-ink:     #1C1C1C;
+      --col-mid:     #404040;
+      --col-steel:   #78808A;
+      --col-paper:   #F4F4EF;
+      --col-gold:    #C8A84B;
+      --col-gold-dk: #7A5C0A;
+      --col-phos:    #3DFF6E;
+      --col-phos-dk: #0A160C;
+      --col-panel:   #111111;
+      --col-border:  #252525;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--col-void);
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+    }
+
+    #game-container {
+      position: relative;
+    }
+
+    /* Loading screen */
+    #loading {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--col-void);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
+    }
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading .symbol {
+      font-size: 36px;
+      color: var(--col-gold);
+      font-family: 'JetBrains Mono', monospace;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    #loading .text {
+      font-size: 10px;
+      color: var(--col-steel);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 4px;
+      margin-top: 16px;
+    }
+    #loading .progress-bar {
+      width: 160px;
+      height: 2px;
+      background: var(--col-border);
+      margin-top: 20px;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    #loading .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--col-gold);
+      transition: width 0.3s ease;
+    }
+    #loading .version {
+      font-size: 8px;
+      color: var(--col-mid);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 3px;
+      margin-top: 12px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Focus indicators for accessibility */
+    canvas:focus { outline: 2px solid var(--col-gold); outline-offset: 2px; }
+    *:focus-visible { outline: 2px solid var(--col-gold); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loading">
+    <div class="symbol">⦿</div>
+    <div class="text">LOADING</div>
+    <div class="progress-bar"><div class="progress-fill" id="load-progress"></div></div>
+    <div class="version">v0.9.0</div>
+  </div>
+
+  <div id="game-container"></div>
+
+  <!-- Core modules -->
+  <script src="src/ballistics.js?v=5"></script>
+  <script src="src/state.js?v=5"></script>
+  <script src="src/weapons.js?v=5"></script>
+  <script src="src/missions.js?v=5"></script>
+
+  <!-- Scenes -->
+  <script src="src/scenes/BootScene.js?v=5"></script>
+  <script src="src/scenes/MenuScene.js?v=5"></script>
+  <script src="src/scenes/FieldManualScene.js?v=5"></script>
+  <script src="src/scenes/ScopeScene.js?v=5"></script>
+  <script src="src/scenes/TracerScene.js?v=5"></script>
+  <script src="src/scenes/RunEndScene.js?v=5"></script>
+  <script src="src/scenes/UpgradeShopScene.js?v=5"></script>
+  <script src="src/scenes/SettingsScene.js?v=5"></script>
+
+  <!-- Main entry -->
+  <script src="src/main.js?v=5"></script>
+
+  <!-- Hide loading screen once Phaser boots -->
+  <script>
+    // Simulated progressive loading
+    (function() {
+      const bar = document.getElementById('load-progress');
+      let pct = 0;
+      const steps = [
+        { target: 30, delay: 100 },   // scripts parsed
+        { target: 60, delay: 200 },   // modules ready
+        { target: 85, delay: 300 },   // scenes registered
+      ];
+      steps.forEach(s => {
+        setTimeout(() => { pct = s.target; if (bar) bar.style.width = pct + '%'; }, s.delay);
+      });
+
+      window.addEventListener('load', () => {
+        if (bar) bar.style.width = '100%';
+        setTimeout(() => {
+          const el = document.getElementById('loading');
+          if (el) el.classList.add('hidden');
+        }, 600);
+      });
+    })();
+  </script>
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <div style="position:fixed;inset:0;background:#080808;display:flex;align-items:center;justify-content:center;z-index:99999">
+      <p style="font-family:monospace;color:#C8A84B;font-size:14px;text-align:center">
+        COLD ZERO requires JavaScript to run.<br>
+        Please enable JavaScript and reload.
+      </p>
+    </div>
+  </noscript>
+</body>
+</html>

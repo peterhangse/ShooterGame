@@ -1,0 +1,91 @@
+{
+  "_comment": "Cold Zero mission data — briefings, names, locations, targets, weather presets",
+
+  "briefings": [
+    "Target is a logistics coordinator.\nRange: %%RANGE%%m. Wind: %%WIND%% m/s %%WINDDIR%%.\n%%MODIFIER%%\n\nLocation: %%LOCATION%%\nConditions: %%WEATHER%%, %%TEMP%%°C\nBuilding roof, third level. One round.",
+    "OPERATION: %%NAME%%\n\nRange: %%RANGE%%m\nWind: %%WIND%% m/s %%WINDDIR%%\n%%MODIFIER%%\n\nLocation: %%LOCATION%%\nHigh-value target confirmed.\nOne round. Make it count.",
+    "PRIORITY TARGET\n\n%%NAME%%\n\nDistance: %%RANGE%%m\nCrosswind: %%WIND%% m/s %%WINDDIR%%\n%%MODIFIER%%\n\nConditions: %%WEATHER%%\nWindow is closing. You have one shot.",
+    "INTEL BRIEF\n\n%%NAME%%\n\nTarget at %%RANGE%%m.\nWind reading: %%WIND%% %%WINDDIR%%.\n%%MODIFIER%%\n\n%%LOCATION%% — %%WEATHER%%\nConfirm the kill.",
+    "Overwatch position established.\n\n%%NAME%%\nRange: %%RANGE%%m. %%WINDDIR%% wind %%WIND%% m/s.\n%%MODIFIER%%\n\nTarget is stationary near vehicle.\nClear to engage.",
+    "Relay from command:\n\nDesignation %%NAME%%.\n%%RANGE%%m. Wind %%WIND%% %%WINDDIR%%.\n%%MODIFIER%%\n\nNo extraction planned.\nMake it clean.",
+    "Intel package received.\n\n%%NAME%%\nSubject last seen at %%RANGE%%m bearing northeast.\nWind: %%WIND%% m/s %%WINDDIR%%.\n%%MODIFIER%%\n\n%%LOCATION%%\nSingle opportunity.",
+    "Forward observer confirms:\n\n%%NAME%%\nTarget in open ground. %%RANGE%%m.\nCrosswind %%WIND%% %%WINDDIR%%.\n%%MODIFIER%%\n\nAtmospherics: %%WEATHER%%, %%TEMP%%°C\nYou are weapons free.",
+    "Surveillance log #%%LOGNUM%%\n\n%%NAME%%\nSubject stationary. Distance %%RANGE%%m.\nWind %%WIND%% m/s from %%WINDDIR_LONG%%.\n%%MODIFIER%%\n\nConditions: %%WEATHER%%\nEngage at discretion.",
+    "FLASH PRIORITY\n\n%%NAME%%\n%%RANGE%%m. %%WINDDIR%% %%WIND%%.\n%%MODIFIER%%\n\nTarget is armed. Collateral risk minimal.\nOne shot authorized.",
+    "%%NAME%%\n\nLong gun solution required.\nDistance: %%RANGE%%m.\nWind: %%WIND%% m/s %%WINDDIR%%.\n%%MODIFIER%%\n\n%%LOCATION%% sector\nDo not miss.",
+    "Spotters report:\n\n%%NAME%%\nTarget moving between structures.\nCurrent position %%RANGE%%m.\nWind %%WIND%% %%WINDDIR%%.\n%%MODIFIER%%\n\nNext exposure window is final.",
+    "Contract %%NAME%%\n\nApproved. Fee on confirmation.\nRange %%RANGE%%m. Wind %%WIND%% m/s %%WINDDIR%%.\n%%MODIFIER%%\n\n%%LOCATION%%\nNo questions after.",
+    "Thermal imaging confirms one subject.\n\n%%NAME%%\nRange %%RANGE%%m\nAtmospherics: %%WIND%% m/s %%WINDDIR%%, %%TEMP%%°C\n%%MODIFIER%%\n\nSend it.",
+    "%%NAME%%\n\nSubject is the one on the left.\nRange: %%RANGE%%m.\nWind: %%WIND%% m/s %%WINDDIR%%.\n%%MODIFIER%%\n\n%%LOCATION%%\nDo not confuse them."
+  ],
+
+  "operationNames": [
+    "SILENT VIPER", "IRON DUSK", "BLACK HORIZON", "GHOST WIND",
+    "PALE SHADOW", "COLD EMBER", "STEEL RAIN", "NIGHT ORACLE",
+    "DEAD RECKONING", "BROKEN ARROW", "FROST BITE", "DARK REACH",
+    "WOLF TRACK", "RED DAWN", "HOLLOW POINT", "PAPER TRAIL",
+    "GRAY MIRAGE", "THIN ICE", "SALT WIND", "DEAD DROP",
+    "STONE ECHO", "BLIND MERIDIAN", "COPPER VEIN", "ZERO LINE",
+    "SILVER THREAD", "IRON CURTAIN", "COLD FRONT", "DARK WATER",
+    "SMOKE SIGNAL", "NIGHT HAMMER", "GHOST PROTOCOL", "BLOOD MERIDIAN"
+  ],
+
+  "locations": [
+    "NORTHERN RIDGE", "INDUSTRIAL DISTRICT", "PORT AUTHORITY",
+    "EMBASSY ROW", "RIVERSIDE OVERWATCH", "ROOFTOP DELTA-6",
+    "RAILWAY JUNCTION", "AIRFIELD PERIMETER", "MOUNTAIN PASS",
+    "COASTAL OUTPOST", "ABANDONED WAREHOUSE", "CITY CENTER",
+    "BRIDGE APPROACH", "FOREST CLEARING", "DESERT COMPOUND",
+    "HARBOUR CRANE", "HOTEL ROOFTOP", "CONSTRUCTION SITE",
+    "HIGHWAY OVERPASS", "CHURCH TOWER"
+  ],
+
+  "targetProfiles": [
+    { "role": "logistics coordinator",  "threat": "low",    "movement": "stationary" },
+    { "role": "arms dealer",            "threat": "medium", "movement": "patrolling" },
+    { "role": "cell leader",            "threat": "high",   "movement": "stationary" },
+    { "role": "bomb maker",             "threat": "high",   "movement": "stationary" },
+    { "role": "courier",                "threat": "low",    "movement": "walking" },
+    { "role": "financier",              "threat": "medium", "movement": "stationary" },
+    { "role": "recruiter",              "threat": "medium", "movement": "patrolling" },
+    { "role": "undercover operative",   "threat": "high",   "movement": "walking" },
+    { "role": "regional commander",     "threat": "high",   "movement": "stationary" },
+    { "role": "surveillance specialist","threat": "medium", "movement": "patrolling" },
+    { "role": "foreign agent",          "threat": "high",   "movement": "walking" },
+    { "role": "informant (turned)",     "threat": "low",    "movement": "stationary" }
+  ],
+
+  "weatherPresets": {
+    "clear":    { "windMod": 1.0, "visMod": 1.0,  "label": "CLEAR",      "tempRange": [5, 25]  },
+    "overcast": { "windMod": 1.0, "visMod": 0.85, "label": "OVERCAST",   "tempRange": [2, 18]  },
+    "fog":      { "windMod": 0.6, "visMod": 0.5,  "label": "FOG",        "tempRange": [-2, 12] },
+    "rain":     { "windMod": 1.3, "visMod": 0.7,  "label": "LIGHT RAIN", "tempRange": [3, 15]  },
+    "snow":     { "windMod": 1.1, "visMod": 0.6,  "label": "SNOW",       "tempRange": [-15, 2] },
+    "dust":     { "windMod": 1.5, "visMod": 0.55, "label": "DUST STORM", "tempRange": [25, 45] },
+    "windy":    { "windMod": 1.8, "visMod": 0.95, "label": "HIGH WINDS", "tempRange": [0, 20]  }
+  },
+
+  "modifierPools": {
+    "civilian": [
+      "Civilian presence reported. Identify target.",
+      "Bystanders in the area. Positive ID required.",
+      "Non-combatants near the target. Careful."
+    ],
+    "moving": [
+      "Target is mobile. Lead accordingly.",
+      "Subject moving between positions. Time the shot.",
+      "Target in transit. Wait for pause."
+    ],
+    "timed": [
+      "Time window: %%TIME%%s.",
+      "Extraction window closes in %%TIME%%s.",
+      "%%TIME%%s before the target moves inside."
+    ],
+    "calm": [
+      "No time pressure. Breathe.",
+      "Steady conditions. Take your time.",
+      "Clear shot. No rush.",
+      "Perfect conditions. Make it clean."
+    ]
+  }
+}

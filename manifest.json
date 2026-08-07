@@ -1,0 +1,18 @@
+{
+  "name": "COLD ZERO — Sniper Precision Game",
+  "short_name": "COLD ZERO",
+  "description": "Adjust elevation, read the wind, take the shot. One round. No second chances.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "categories": ["games"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⦿</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
