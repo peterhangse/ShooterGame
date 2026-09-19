@@ -1,4 +1,5 @@
 Spel
 kod: opencode
 server: python3 -m http.server 8000
+deploy: git add -A && git commit -m 'uppdatering' && git push origin main && firebase deploy
 https://cold-zero-game.web.app
